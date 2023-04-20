@@ -1,0 +1,22 @@
+# Distribution
+pip-tools
+
+# Code style
+mypy
+black
+pre-commit
+
+# PyTest for running the tests.
+pytest
+pytest-cov
+parameterized
+unittest-xml-reporting
+coverage
+aiounittest
+httpx
+
+# tools
+pyodbc!=4.0.34  # NOTE: 4.0.34 is known to cause a segmentation fault
+
+pyjwt
+requests

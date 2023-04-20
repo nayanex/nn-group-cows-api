@@ -1,0 +1,9 @@
+# PyPi libraries
+fastapi
+fastapi-pagination[sqlalchemy]
+pyjwt
+pyodbc != 4.0.34  # NOTE: 4.0.34 crashes the application with a segmentation fault
+sqlalchemy>=1.4,<2.0  # NOTE: SQLAlchemy 2.0 not yet supported!
+setuptools
+types-setuptools
+pyparsing

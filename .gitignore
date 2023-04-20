@@ -1,0 +1,20 @@
+.vscode/
+.idea/
+*.iml
+*.egg-info
+*.pyc
+requirements/requirements-dev.in
+requirements/requirements-dev.txt
+
+.coverage
+coverage.xml
+.xml_output
+
+venv/
+build/
+dist/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
