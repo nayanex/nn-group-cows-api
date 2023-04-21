@@ -5,13 +5,19 @@
 Create Virtual Environment:
 
 `python -m venv venv`
+`python3 -m venv --without-pip venv`
 
-Activate previouslly created virtual environment
+#### Activate previously created virtual environment
 
-venv/Scripts/activate
+`source .venv/bin/activate` (Linux/macOS) 
 
+or 
 
-Install required dependencies:
+`.venv\Scripts\Activate.ps1` (Windows). 
+
+You know the environment is activated when the command prompt shows **(.venv)** at the beginning.
+
+#### Install required dependencies:
 
 ```
 pip install -r /requirements/requirements.txt
