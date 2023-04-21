@@ -1,13 +1,14 @@
 from datetime import datetime
 from typing import Any, Dict, List
+from http import HTTPStatus
 
 from cow_model import models as db_models
 from cow_api_utils.parameters import session_scope
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
 from fastapi.params import Body, Query
 
 from cow_api.src.api.v1 import models as api_models
-from cow_api.utils.parameters import CowParam
+from cow_api.src.utils.parameters import CowParam
 
 router = APIRouter()
 
@@ -91,3 +92,66 @@ def update_fields_cow(json: Any, body: Any, cow: db_models.Cow) -> None:
         cow.amount_l = body.amount_l
     if "has_calves" in json:
         cow.has_calves = body.has_calves
+
+
+@router.get(
+    base_path, response_model=api_models.Cow, responses={404: {"description": "Bad request: Not found"}}
+)
+async def get_cow(
+    cw: CowParam = Depends(),
+) -> api_models.Cow:
+    """Returns the data producer that is provided as input."""
+    with session_scope() as session:
+        cw.initialize(session=session)
+        cw.is_required()
+
+        return cw.as_api_model()
+
+
+@router.delete(
+    base_path,
+    status_code=HTTPStatus.NO_CONTENT,
+    response_class=Response,
+    responses={status.HTTP_404_NOT_FOUND: {"description": "Bad request: Not found"}},
+)
+async def delete(
+    cw: CowParam = Depends(CowParam),
+) -> Response:
+    """Deletes the data producer that is provided as input."""
+    with session_scope() as session:
+        cw.initialize(session=session)
+        cw.is_required()
+
+        session.delete(cw.cow)
+        session.commit()
+
+        return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+@router.put(
+    base_path,
+    status_code=201,
+    response_model=api_models.Cow,
+    responses={404: {"description": "Bad request: Not found"}},
+)
+async def put(
+    request: Request,
+    cw: CowParam = Depends(),
+    body: api_models.Cow = Body(..., description="The body input"),
+) -> api_models.Cow:
+    """Updates the cow record with the body input.<br>
+    The modification date and modified by columns will also be modified."""
+    with session_scope() as session:
+        cw.initialize(session=session)
+        cw.is_required()
+
+        now = datetime.now()
+        json = await request.json()
+        if "name" in json:
+            cw.cow.name = body.name
+        update_fields_cow(json, body, cw.cow)
+        cw.cow.modified_by = "API System"
+        cw.cow.modified_on = now
+        session.commit()
+
+        return cw.as_api_model()
