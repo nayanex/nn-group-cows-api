@@ -62,6 +62,4 @@ def clear_database(create_cow_tables, session_scope):
     """Helper to clean the COW data tables."""
     with session_scope() as session:
         session.query(models.Cow).delete()
-        session.query(models.Feeding).delete()
-        session.query(models.MilkProduction).delete()
         session.commit()

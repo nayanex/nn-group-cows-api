@@ -15,7 +15,7 @@ class Cow(Base, AuditBase):
     last_measured_kg = sa.Column(sa.DateTime)
     amount_kg_feeding = sa.Column(sa.Float)
     cron_schedule_feeding = sa.Column(sa.String(15))
-    last_measured_feeding = last_measured_kg = sa.Column(sa.DateTime)
+    last_measured_feeding = sa.Column(sa.DateTime)
     last_milk = sa.Column(sa.DateTime)
     cron_schedule_milk = sa.Column(sa.String(15))
     amount_l = sa.Column(sa.Float)

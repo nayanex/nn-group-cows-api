@@ -15,11 +15,11 @@ base_path = "/cow"
 
 @router.get(
     base_path + "/cows",
-    response_model=List[api_models.DeliveryRetention],
+    response_model=List[api_models.Cow],
 )
 async def get_cows(
 ) -> List[api_models.Cows]:
 
     with session_scope() as session:
-        cows = session.query(db_models.Cow)
+        cows = session.query(db_models.Cow).all()
         return [api_models.Cow.from_db_model(c) for c in cows]

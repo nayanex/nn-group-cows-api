@@ -42,25 +42,6 @@ def default_api_int_headers_no_auth(user_agent):
         "User-Agent": user_agent,
     }
 
-
-@pytest.fixture
-def create_milk_production(default_audit):
-    """Helper to create a dataset in COW database."""
-
-    def _milk_production(session, last_milk, cron_schedule, amount_l):
-        mp = db_models.MilkProduction(
-            last_milk=last_milk,
-            cron_schedule=cron_schedule,
-            amount_l=amount_l,
-            **default_audit,
-        )
-        session.add(mp)
-        session.flush()
-        return mp
-
-    return _milk_production
-
-
 @pytest.fixture(scope="class")
 def create_cow(default_audit):
     """Helper to create a data object in COW database."""
@@ -73,20 +54,27 @@ def create_cow(default_audit):
         condition,
         has_calves,
         mass_kg,
-        last_measured,
-        feeding_id,
-        milk_production_id,
+        last_measured_kg,
+        amount_kg_feeding,
+        cron_schedule_feeding,
+        last_measured_feeding,
+        last_milk,
+        cron_schedule_milk,
+        amount_l
     ):
         cow = db_models.Cow(
             name=name,
-            sex=sex,
+            sex= sex,
             birthdate=birthdate,
-            condition=condition,
-            has_calves=has_calves,
             mass_kg=mass_kg,
-            last_measured=last_measured,
-            feeding_id=feeding_id,
-            milk_production_id=milk_production_id,
+            last_measured_kg=last_measured_kg,
+            amount_kg_feeding=amount_kg_feeding,
+            cron_schedule_feeding=cron_schedule_feeding,
+            last_measured_feeding=last_measured_feeding,
+            last_milk=last_milk,
+            cron_schedule_milk=cron_schedule_milk,
+            amount_l=amount_l,
+            has_calves=has_calves
             **default_audit
         )
         session.add(cow)
@@ -94,26 +82,6 @@ def create_cow(default_audit):
         return cow
 
     return _cow
-
-
-@pytest.fixture(scope="class")
-def create_feeding(default_audit):
-    """Helper to create a feeding in the COW database."""
-
-    def _feeding(
-        session, amount_kg, cron_schedule, last_measured
-    ):
-        fe = db_models.Feeding(
-            amount_kg=amount_kg,
-            cron_schedule=cron_schedule,
-            last_measured=last_measured
-            **default_audit,
-        )
-        session.add(fe)
-        session.flush()
-        return fe
-
-    return _feeding
 
 
 @pytest.fixture(scope="class")
