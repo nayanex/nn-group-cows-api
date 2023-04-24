@@ -1,8 +1,8 @@
 from datetime import datetime
 from typing import Optional
 
-from cow_model.src import models as db_models
 from cow_api_utils.src.models import BaseModel
+from cow_model.src import models as db_models
 
 
 class Feeding(BaseModel):
@@ -21,6 +21,7 @@ class MilkProduction(BaseModel):
     cron_schedule: Optional[str] = None
     amount_l: Optional[float] = None
 
+
 class Cow(BaseModel):
     name: Optional[str] = None
     sex: Optional[str] = None
@@ -33,21 +34,16 @@ class Cow(BaseModel):
 
     @classmethod
     def from_db_model(cls, cow: db_models.Cow) -> "Cow":
-        weight = Weight(
-            mass_kg = cow.mass_kg,
-            last_measured = cow.last_measured_kg
-        )
+        weight = Weight(mass_kg=cow.mass_kg, last_measured=cow.last_measured_kg)
 
         feeding = Feeding(
-            amount_kg = cow.amount_kg_feeding,
-            cron_schedule = cow.cron_schedule_feeding,
-            last_measured = cow.last_measured_feeding
+            amount_kg=cow.amount_kg_feeding,
+            cron_schedule=cow.cron_schedule_feeding,
+            last_measured=cow.last_measured_feeding,
         )
 
         milk_production = MilkProduction(
-            last_milk = cow.last_milk,
-            cron_schedule = cow.cron_schedule_milk,
-            amount_l = cow.amount_l
+            last_milk=cow.last_milk, cron_schedule=cow.cron_schedule_milk, amount_l=cow.amount_l
         )
 
         return Cow(
@@ -60,7 +56,3 @@ class Cow(BaseModel):
             milk_production=milk_production,
             has_calves=cow.has_calves,
         )
-
-
-
-

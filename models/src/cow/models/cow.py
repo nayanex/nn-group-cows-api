@@ -1,7 +1,7 @@
 import sqlalchemy as sa
 from sqlalchemy.orm import Query, Session
 
-from src.models.base import AuditBase, Base
+from .base import AuditBase, Base
 
 
 class Cow(Base, AuditBase):

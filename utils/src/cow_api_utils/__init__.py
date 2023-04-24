@@ -1,14 +1,14 @@
-"""__init__.py - Modules file for ./cow-api-utils"""
 from typing import Optional
 
-import pkg_resources
-from cow_model.src.utils import CowValidationError
+import pkg_resources  # type: ignore
 from fastapi import FastAPI, Response
 from starlette.requests import Request
 from starlette.responses import JSONResponse, RedirectResponse
 
-from src import app_config
-from src.generic_api import create_generic_router
+from models.src.cow import CowValidationError
+
+from . import app_config
+from .generic_api import create_generic_router
 
 __version__ = pkg_resources.get_distribution("cow_api_utils").version
 

@@ -1,19 +1,10 @@
 from typing import Any
 
-import cow_model
-import cow_api_utils
-import pkg_resources
-from cow_api_utils import app_config, create_generic_app
+from cow_api.src.api.v1 import cow_api
+from cow_api_utils.src import app_config, create_generic_app
 from fastapi import FastAPI
 
-from cow_api.api.v1 import (
-    cow_api,
-    feeding_api,
-    milk_production_api
-)
-from cow_api.utils.mask_headers import mask_headers  # noqa: F401
-
-__version__ = pkg_resources.get_distribution("cow_api").version
+__version__ = "1.0.0"
 
 cow_api_app = None
 
@@ -21,8 +12,8 @@ cow_api_app = None
 def module_versions() -> Any:
     return {
         "cow_api": __version__,
-        "cow_model": cow_model.__version__,
-        "cow_api_utils": cow_api_utils.__version__,
+        # "cow_model": cow_model.__version__,
+        # "cow_api_utils": cow_api_utils.__version__,
     }
 
 
@@ -33,11 +24,10 @@ def create_cow_app_v1() -> FastAPI:
         module_versions=module_versions(),
     )
     app_v1.root_path = "/api/cow/v1"
-    app_v1.include_router(cow_api.router, tags=["Data Producer"])
-    app_v1.include_router(feeding_api.router, tags=["Data Set"])
-    app_v1.include_router(milk_production_api.router, tags=["Storage Account"])
+    app_v1.include_router(cow_api.router, tags=["Cow"])
 
     return app_v1
+
 
 def create_app() -> FastAPI:
     global cow_api_app

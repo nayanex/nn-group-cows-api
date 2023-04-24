@@ -1,12 +1,13 @@
 from datetime import datetime
 
 import pytest
-from cow_model import models as db_models
+
+# import cow_api.src
+from cow_api.src import create_app
+from cow_model.src import models as db_models
 from fastapi.testclient import TestClient
 
-import cow_api
-
-pytest_plugins = ["tests.conftest_db", "tests.conftest_int"]
+pytest_plugins = ["tests.conftest_db"]
 LATEST_API_VERSION = 1
 
 
@@ -42,6 +43,7 @@ def default_api_int_headers_no_auth(user_agent):
         "User-Agent": user_agent,
     }
 
+
 @pytest.fixture(scope="class")
 def create_cow(default_audit):
     """Helper to create a data object in COW database."""
@@ -60,13 +62,14 @@ def create_cow(default_audit):
         last_measured_feeding,
         last_milk,
         cron_schedule_milk,
-        amount_l
+        amount_l,
     ):
         cow = db_models.Cow(
             name=name,
-            sex= sex,
+            sex=sex,
             birthdate=birthdate,
             mass_kg=mass_kg,
+            condition=condition,
             last_measured_kg=last_measured_kg,
             amount_kg_feeding=amount_kg_feeding,
             cron_schedule_feeding=cron_schedule_feeding,
@@ -74,8 +77,7 @@ def create_cow(default_audit):
             last_milk=last_milk,
             cron_schedule_milk=cron_schedule_milk,
             amount_l=amount_l,
-            has_calves=has_calves
-            **default_audit
+            has_calves=has_calves**default_audit,
         )
         session.add(cow)
         session.flush()
@@ -99,8 +101,6 @@ def default_audit():
 @pytest.fixture(scope="session")
 def api_test_client():
     """Helper to create and returns a request in the COW api."""
-    app = cow_api.create_app()
+    app = create_app()
     client = TestClient(app)
     return client
-
-

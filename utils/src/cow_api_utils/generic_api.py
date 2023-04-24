@@ -1,11 +1,10 @@
 """generic_api.py - Methods related to router generation."""
 from typing import Any, Dict, Optional
 
-from fastapi import APIRouter, HTTPException
-from sqlalchemy import text
-
 from cow_api_utils.src import app_config
 from cow_api_utils.src.parameters import session_scope
+from fastapi import APIRouter, HTTPException
+from sqlalchemy import text
 
 
 def create_generic_router(module_versions: Optional[dict] = None) -> APIRouter:

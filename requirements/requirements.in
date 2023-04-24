@@ -1,4 +1,5 @@
 # PyPi libraries
+alembic
 fastapi
 fastapi-pagination[sqlalchemy]
 pyjwt
@@ -7,3 +8,6 @@ sqlalchemy>=1.4,<2.0  # NOTE: SQLAlchemy 2.0 not yet supported!
 setuptools
 types-setuptools
 pyparsing
+jsonschema
+importlib-metadata
+Deprecated

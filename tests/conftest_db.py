@@ -1,11 +1,11 @@
 from contextlib import contextmanager
 
 import pytest
-from cow_model import models
-from cow_model.connection import clean_database
-from cow_api_utils import app_config
-from cow_api_utils.db import create_session
-from cow_api_utils.db import engine as eau_engine
+from cow_api_utils.src import app_config
+from cow_api_utils.src.db import create_session
+from cow_api_utils.src.db import engine as eau_engine
+from cow_model.src import models
+from cow_model.src.connection import clean_database
 from sqlalchemy.orm import Session, scoped_session, sessionmaker
 from sqlalchemy.schema import CreateSchema, DropSchema
 

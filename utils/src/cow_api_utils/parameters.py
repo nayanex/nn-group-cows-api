@@ -1,6 +1,9 @@
 """parameters.py - Set the Session and Common parameters."""
 from contextlib import contextmanager
+
 from sqlalchemy.orm import Session, sessionmaker
+
+from utils.src.cow_api_utils.db import engine
 
 
 @contextmanager

@@ -1,6 +1,5 @@
 """app_config.py - Reads the environment variables and sets the application constants."""
 import os
-from typing import Optional
 
 _sql_protocol = os.getenv("SQL_PROTOCOL")
 if _sql_protocol is None:

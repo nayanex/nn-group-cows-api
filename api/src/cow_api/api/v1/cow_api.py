@@ -1,25 +1,24 @@
 from datetime import datetime
-from typing import Any, Dict, List
 from http import HTTPStatus
-
-from cow_model import models as db_models
-from cow_api_utils.parameters import session_scope
-from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
-from fastapi.params import Body, Query
+from typing import Any, List
 
 from cow_api.src.api.v1 import models as api_models
 from cow_api.src.utils.parameters import CowParam
+from cow_api_utils.src.parameters import session_scope
+from cow_model.src import models as db_models
+from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
+from fastapi.params import Body, Query
 
 router = APIRouter()
 
 base_path = "/cow"
 
+
 @router.get(
     base_path + "/cows",
     response_model=List[api_models.Cow],
 )
-async def get_cows(
-) -> List[api_models.Cows]:
+async def get_cows() -> List[api_models.Cow]:
 
     with session_scope() as session:
         cows = session.query(db_models.Cow).all()
@@ -40,7 +39,8 @@ async def create_cow(
 ) -> api_models.Cow:
     """<p>Checks whether cow that is provided in the body exists in the database.<br>
     Creates cow if it does not exist.</p>
-    <p>Setting the overwrite parameter to true will create the cow if it does not exist or will update the cow with the input in the body if it does exist.<br>
+    <p>Setting the overwrite parameter to true will create the cow if it does not exist or will update the cow with the
+    input in the body if it does exist.<br>
     When updating a record, the modification date and modified by will be modified as well.</p>"""
     now = datetime.now()
     json = await request.json()
@@ -54,7 +54,7 @@ async def create_cow(
                 name=cw.cow_key.name,
                 created_by="API System",
                 created_on=now,
-                sex= body.sex,
+                sex=body.sex,
                 birthdate=body.birthdate,
                 mass_kg=body.mass_kg,
                 last_measured_kg=body.last_measured_kg,
@@ -64,7 +64,7 @@ async def create_cow(
                 last_milk=body.last_milk,
                 cron_schedule_milk=body.cron_schedule_milk,
                 amount_l=body.amount_l,
-                has_calves=body.has_calves
+                has_calves=body.has_calves,
             )
             session.add(cw.cow)
         else:
@@ -74,6 +74,7 @@ async def create_cow(
         session.commit()
 
         return cw.as_api_model()
+
 
 def update_fields_cow(json: Any, body: Any, cow: db_models.Cow) -> None:
     if "birthdate" in json:
@@ -94,9 +95,7 @@ def update_fields_cow(json: Any, body: Any, cow: db_models.Cow) -> None:
         cow.has_calves = body.has_calves
 
 
-@router.get(
-    base_path, response_model=api_models.Cow, responses={404: {"description": "Bad request: Not found"}}
-)
+@router.get(base_path, response_model=api_models.Cow, responses={404: {"description": "Bad request: Not found"}})
 async def get_cow(
     cw: CowParam = Depends(),
 ) -> api_models.Cow:

@@ -3,9 +3,8 @@ import os
 from typing import Any
 
 import uvicorn
+from cow_api import create_app, mask_headers
 from starlette.requests import Request
-
-from emr_api import create_app, mask_headers
 
 logging.basicConfig(level=os.getenv("LOG_LEVEL", default="INFO"))
 

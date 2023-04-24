@@ -5,23 +5,22 @@
 Create Virtual Environment:
 
 `python -m venv venv`
-`python3 -m venv --without-pip venv`
 
 #### Activate previously created virtual environment
 
-`source .venv/bin/activate` (Linux/macOS) 
+`source venv/bin/activate` (Linux/macOS)
 
-or 
+or
 
-`.venv\Scripts\Activate.ps1` (Windows). 
+`.venv\Scripts\Activate.ps1` (Windows).
 
 You know the environment is activated when the command prompt shows **(.venv)** at the beginning.
 
 #### Install required dependencies:
 
 ```
-pip install -r /requirements/requirements.txt
-pip install -r /requirements/requirements-test.txt
+pip3 install -r requirements/requirements.txt
+pip3 install -r requirements/requirements-test.txt
 ```
 
 ### Pre-commit
@@ -30,7 +29,7 @@ The package uses `pre-commit` to improve and ensure code quality. To install it,
 environment:
 
 1. cd into the root of your GIT repository
-2. `pip install pre-commit`
+2. `pip3 install pre-commit`
 3. `pre-commit install`
 
 This installs a git hook which runs pre-commit prior to committing anything to the GIT repository and **needs to be done
@@ -46,7 +45,12 @@ This package requires a working SQL Server for testing. In order to test against
 run the following command:
 
 ```bash
-docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=password!Password" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest
+docker pull mcr.microsoft.com/mssql/server:2017-latest
+
+export pass='password!Password'
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD='password!Password'" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest
+
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=$pass" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest
 ```
 
 Then set the following env values to use it:
@@ -56,7 +60,7 @@ export SQL_PROTOCOL=mssql
 export SQL_SERVER=localhost
 export SQL_DB=master
 export SQL_USER=sa
-export SQL_PASS='password!Password'
+export SQL_PASS='password!Password' or export SQL_PASS=$pass
 export SQL_AUTHENTICATION=SqlPassword
 ```
 
@@ -64,6 +68,7 @@ In case you have issues connecting with the database due to the driver, make sur
 
 ```bash
 export ODBC_DRIVER = <driver name>
+export ODBC_DRIVER='ODBC Driver 17 for SQL Server'
 ```
 
 Where `<driver name>` is `SQL Server` on Windows and `ODBC Driver 17 for SQL Server` on Unix/MacOS.
@@ -93,7 +98,7 @@ pip install pip-tools
 
 Then run below commands to check changes:
 ```$bash
-pip install pip-tools
+pip3 install pip-tools
 cd requirements
 pip-compile requirements.in
 pip-compile --output-file requirements-test.txt requirements.in requirements-test.in
@@ -108,5 +113,3 @@ as it is specific to windows:
     #pywin32==303
     # via portalocker
 ```
-
-
