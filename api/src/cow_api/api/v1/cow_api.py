@@ -2,12 +2,13 @@ from datetime import datetime
 from http import HTTPStatus
 from typing import Any, List
 
-from cow_api.src.api.v1 import models as api_models
-from cow_api.src.utils.parameters import CowParam
-from cow_api_utils.src.parameters import session_scope
-from cow_model.src import models as db_models
 from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
 from fastapi.params import Body, Query
+
+from api.src.cow_api.api.v1 import models as api_models
+from api.src.cow_api.utils.parameters import CowParam
+from models.src.cow import models as db_models
+from utils.src.cow_api_utils.parameters import session_scope
 
 router = APIRouter()
 

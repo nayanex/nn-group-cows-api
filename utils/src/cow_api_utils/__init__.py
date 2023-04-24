@@ -1,16 +1,16 @@
 from typing import Optional
 
-import pkg_resources  # type: ignore
 from fastapi import FastAPI, Response
 from starlette.requests import Request
 from starlette.responses import JSONResponse, RedirectResponse
 
-from models.src.cow import CowValidationError
+from models.src.cow.utils import CowValidationError
 
 from . import app_config
 from .generic_api import create_generic_router
 
-__version__ = pkg_resources.get_distribution("cow_api_utils").version
+# __version__ = pkg_resources.get_distribution("cow_api_utils").version
+__version__ = "0.0.0"
 
 
 class RedirectException(Exception):

@@ -1,16 +1,8 @@
 from datetime import datetime
 
-import pytest
 
-from cow_model.src.models import Cow
-
-
-def test_empty(
-    api_test_client, api_defaults, default_api_int_headers_no_auth, clear_database
-):
-    response = api_test_client.get(
-        url=api_defaults.prefix_path_cow + "/cows", headers=default_api_int_headers_no_auth
-    )
+def test_empty(api_test_client, api_defaults, default_api_int_headers_no_auth, clear_database):
+    response = api_test_client.get(url=api_defaults.prefix_path_cow + "/cows", headers=default_api_int_headers_no_auth)
     assert response.status_code == 200
     assert response.json() == []
 
@@ -38,7 +30,7 @@ def test_get_cows(
             last_measured_feeding=datetime.now(),
             last_milk=datetime.now(),
             cron_schedule_milk="0 8,12,16,20 * * *",
-            amount_l=2
+            amount_l=2,
         )
     response = api_test_client.get(
         url=api_defaults.prefix_path_data_object + "/cows", headers=default_api_int_headers_no_auth
@@ -55,18 +47,15 @@ def test_get_cows(
             mass_kg=90,
             last_measured_kg=datetime.now(),
             name="cow2",
-            session=session,
+            session=session2,
             amount_kg_feeding=20,
             cron_schedule_feeding="0 8,12,16,20 * * *",
             last_measured_feeding=datetime.now(),
             last_milk=datetime.now(),
             cron_schedule_milk="0 8,12,16,20 * * *",
-            amount_l=5
+            amount_l=5,
         )
 
-    response = api_test_client.get(
-        url=api_defaults.prefix_path_cow + "/cows", headers=default_api_int_headers_no_auth
-    )
+    response = api_test_client.get(url=api_defaults.prefix_path_cow + "/cows", headers=default_api_int_headers_no_auth)
     assert response.status_code == 200
     assert response.json() == ["cow1", "cow2"]
-

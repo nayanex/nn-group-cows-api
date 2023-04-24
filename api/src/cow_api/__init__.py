@@ -1,8 +1,9 @@
 from typing import Any
 
-from cow_api.src.api.v1 import cow_api
-from cow_api_utils.src import app_config, create_generic_app
 from fastapi import FastAPI
+
+from api.src.cow_api.api.v1 import cow_api
+from utils.src.cow_api_utils import app_config, create_generic_app
 
 __version__ = "1.0.0"
 

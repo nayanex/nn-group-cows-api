@@ -1,8 +1,9 @@
-from cow_api.src.api.v1 import models as api_models
-from cow_model.src import models as db_models
 from fastapi import Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_404_NOT_FOUND
+
+from api.src.cow_api.api.v1 import models as api_models
+from models.src.cow import models as db_models
 
 
 class CowKey:

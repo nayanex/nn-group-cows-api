@@ -1,8 +1,8 @@
 from datetime import datetime
 from typing import Optional
 
-from cow_api_utils.src.models import BaseModel
-from cow_model.src import models as db_models
+from models.src.cow import models as db_models
+from utils.src.cow_api_utils.models import BaseModel
 
 
 class Feeding(BaseModel):

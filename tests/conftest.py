@@ -1,11 +1,10 @@
 from datetime import datetime
 
 import pytest
-
-# import cow_api.src
-from cow_api.src import create_app
-from cow_model.src import models as db_models
 from fastapi.testclient import TestClient
+
+from api.src.cow_api import create_app
+from models.src.cow import models as db_models
 
 pytest_plugins = ["tests.conftest_db"]
 LATEST_API_VERSION = 1
