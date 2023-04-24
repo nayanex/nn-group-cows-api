@@ -20,3 +20,4 @@ pyodbc!=4.0.34  # NOTE: 4.0.34 is known to cause a segmentation fault
 
 pyjwt
 requests
+python-dotenv

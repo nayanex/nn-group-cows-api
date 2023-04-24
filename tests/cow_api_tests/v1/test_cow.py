@@ -1,5 +1,9 @@
 from datetime import datetime
 
+from dotenv import load_dotenv
+
+load_dotenv("test.env", override=True)
+
 
 def test_empty(api_test_client, api_defaults, default_api_int_headers_no_auth, clear_database):
     response = api_test_client.get(url=api_defaults.prefix_path_cow + "/cows", headers=default_api_int_headers_no_auth)

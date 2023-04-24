@@ -25,10 +25,6 @@ _sql_pass = os.getenv("SQL_PASS")
 if _sql_pass is None:
     _sql_pass = os.getenv("CUSTOMCONNSTR_SQL_PASS")
 
-_commit_id = os.getenv("COMMIT_ID")
-_build_id = os.getenv("BUILD_ID")
-_token_cache_dir = os.getenv("TOKEN_CACHE_DIR")
-
 _odbc_driver: str = os.getenv("ODBC_DRIVER") or "ODBC Driver 17 for SQL Server"
 
 

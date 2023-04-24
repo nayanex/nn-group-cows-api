@@ -44,7 +44,7 @@ def create_generic_app(
         return response
 
     @app.exception_handler(CowValidationError)
-    async def handle_emr_validation_error(request: Request, exc: CowValidationError) -> Response:
+    async def handle_cow_validation_error(request: Request, exc: CowValidationError) -> Response:
         """Override the default exception handler.
         Args:
             request[Request]: Http request handler

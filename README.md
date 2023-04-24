@@ -50,7 +50,7 @@ docker pull mcr.microsoft.com/mssql/server:2017-latest
 export pass='password!Password'
 docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD='password!Password'" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest
 
-docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=$pass" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=#@P4ssword" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest
 ```
 
 Then set the following env values to use it:

@@ -3,7 +3,7 @@ from datetime import datetime
 import pytest
 from fastapi.testclient import TestClient
 
-from api.src.cow_api import create_app
+import api.src.cow_api as cow_api
 from models.src.cow import models as db_models
 
 pytest_plugins = ["tests.conftest_db"]
@@ -100,6 +100,6 @@ def default_audit():
 @pytest.fixture(scope="session")
 def api_test_client():
     """Helper to create and returns a request in the COW api."""
-    app = create_app()
+    app = cow_api.create_app()
     client = TestClient(app)
     return client

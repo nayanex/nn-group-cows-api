@@ -4,7 +4,6 @@ from typing import Any, Dict, Optional
 from fastapi import APIRouter, HTTPException
 from sqlalchemy import text
 
-from utils.src.cow_api_utils import app_config
 from utils.src.cow_api_utils.parameters import session_scope
 
 
@@ -37,8 +36,4 @@ def create_generic_router(module_versions: Optional[dict] = None) -> APIRouter:
     @router.get("/version")
     def version() -> Dict[str, Any]:
         """Provide an endpoint to list the api version details"""
-        return {
-            "build_id": app_config.build_id(),
-            "commit_id": app_config.commit_id(),
-            "modules": module_versions,
-        }
+        return {"modules": module_versions}
