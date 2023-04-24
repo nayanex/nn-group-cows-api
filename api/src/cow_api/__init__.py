@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from api.src.cow_api.api.v1 import cow_api
 from utils.src.cow_api_utils import app_config, create_generic_app
 
-__version__ = "1.0.0"
+__version__ = 1
 
 cow_api_app = None
 

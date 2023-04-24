@@ -37,3 +37,5 @@ def create_generic_router(module_versions: Optional[dict] = None) -> APIRouter:
     def version() -> Dict[str, Any]:
         """Provide an endpoint to list the api version details"""
         return {"modules": module_versions}
+
+    return router

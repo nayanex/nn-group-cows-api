@@ -10,7 +10,7 @@ from . import app_config
 from .generic_api import create_generic_router
 
 # __version__ = pkg_resources.get_distribution("cow_api_utils").version
-__version__ = "0.0.0"
+__version__ = 1
 
 
 class RedirectException(Exception):

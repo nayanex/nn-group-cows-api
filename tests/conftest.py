@@ -22,8 +22,6 @@ def api_defaults(latest_api_vx):
 
     class ApiDefaults:
         prefix_path_cow = f"/api/cow/{latest_api_vx}/cow"
-        prefix_path_milk_production = f"/api/cow/{latest_api_vx}/milk_production"
-        prefix_path_feeding = f"/api/cow/{latest_api_vx}/feeding"
 
     return ApiDefaults
 
