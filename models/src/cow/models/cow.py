@@ -10,6 +10,7 @@ class Cow(Base, AuditBase):
     cow_id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
     name = sa.Column(sa.String(250), nullable=False, unique=True)
     sex = sa.Column(sa.String(20), nullable=False)
+    condition = sa.Column(sa.String(20))
     birthdate = sa.Column(sa.DateTime, nullable=False)
     mass_kg = sa.Column(sa.Float)
     last_measured_kg = sa.Column(sa.DateTime)

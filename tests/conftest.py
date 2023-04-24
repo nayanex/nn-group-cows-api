@@ -74,7 +74,8 @@ def create_cow(default_audit):
             last_milk=last_milk,
             cron_schedule_milk=cron_schedule_milk,
             amount_l=amount_l,
-            has_calves=has_calves**default_audit,
+            has_calves=has_calves,
+            **default_audit,
         )
         session.add(cow)
         session.flush()

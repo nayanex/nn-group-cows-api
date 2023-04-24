@@ -47,10 +47,7 @@ run the following command:
 ```bash
 docker pull mcr.microsoft.com/mssql/server:2017-latest
 
-export pass='password!Password'
-docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD='password!Password'" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest
-
-docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=#@P4ssword" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=_P4ssword" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest
 ```
 
 Then set the following env values to use it:
@@ -60,7 +57,7 @@ export SQL_PROTOCOL=mssql
 export SQL_SERVER=localhost
 export SQL_DB=master
 export SQL_USER=sa
-export SQL_PASS='password!Password' or export SQL_PASS=$pass
+export SQL_PASS=_P4ssword
 export SQL_AUTHENTICATION=SqlPassword
 ```
 
