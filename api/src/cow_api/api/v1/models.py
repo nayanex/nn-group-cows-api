@@ -48,8 +48,8 @@ class Cow(BaseModel):
 
         return Cow(
             name=cow.name,
-            sex=cow.sex.data_producer.name,
-            birthdate=cow.birthdate.name,
+            sex=cow.sex,
+            birthdate=cow.birthdate,
             condition=cow.condition,
             weight=weight,
             feeding=feeding,

@@ -47,6 +47,7 @@ def create_cow(default_audit):
 
     def _cow(
         session,
+        cow_id,
         name,
         sex,
         birthdate,
@@ -62,6 +63,7 @@ def create_cow(default_audit):
         amount_l,
     ):
         cow = db_models.Cow(
+            cow_id=cow_id,
             name=name,
             sex=sex,
             birthdate=birthdate,
